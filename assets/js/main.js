@@ -226,4 +226,24 @@
   window.addEventListener('load', navmenuScrollspy);
   document.addEventListener('scroll', navmenuScrollspy);
 
+  /** Magazine veille info pop up */
+  let pageFlip1;
+
+  window.addEventListener("load", () => {
+
+      let flipbook1 = document.querySelector("#flipbook1");
+
+      let options1 = {
+          width: 400,
+          height: 500,
+          size: "stretch"
+      };
+
+      pageFlip1 = new St.PageFlip(flipbook1, options1);
+
+      let pages = document.querySelectorAll("#flipbook1 .page");
+
+      pageFlip1.loadFromHTML(pages);
+  });
+
 })();
