@@ -2,30 +2,40 @@
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $nom = htmlspecialchars($_POST['name']);
-    $email = htmlspecialchars($_POST['email']);
-    $sujet = htmlspecialchars($_POST['subject']);
-    $message = htmlspecialchars($_POST['message']);
+    $nom = $_POST['name'];
+    $email = $_POST['email'];
+    $sujet = $_POST['subject'];
+    $message = $_POST['message'];
 
-    // Adresse qui recevra les messages
-    $destinataire = "durrmeyer.lea@gmail.com";
+    // $server = "localhost";      // ou NOM_PC\SQLEXPRESS
+    // $database = "Portfolio";
+    // $username = "Lea";
+    // $password = "Fraise0712";
+    $server = "LAPTOP-QOA5EODC";      
+    $database = "Portfolio";
+    $username = "";
+    $password = "";
 
-    $contenu = "
-    Nom : $nom
+    try {
 
-    Email : $email
+        $pdo = new PDO(
+            "sqlsrv:Server=$server;Database=$database",
+            $username,
+            $password
+        );
 
-    Message :
-    $message
-    ";
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $headers = "From: $email\r\n";
-    $headers .= "Reply-To: $email\r\n";
+        $sql = "INSERT INTO Messages (nom, email, sujet, message)
+                VALUES (?, ?, ?, ?)";
 
-    if(mail($destinataire, $sujet, $contenu, $headers)){
+        $stmt = $pdo->prepare($sql);
+
+        $stmt->execute([$nom, $email, $sujet, $message]);
+
         echo "OK";
-    } else {
-        echo "Erreur lors de l'envoi.";
+
+    } catch (PDOException $e) {
+        echo $e->getMessage();
     }
 }
-?>
