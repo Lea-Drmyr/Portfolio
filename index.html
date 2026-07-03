@@ -1252,34 +1252,39 @@
             <div class="contact-form">
               <h3>Contact</h3>
 
-              <form action="forms/contact.php" method="post" class="php-email-form">
+              <!-- <form action="forms/contact.php" method="post" class="php-email-form"> -->
+              <form action="https://formspree.io/f/xpqgkqya" method="POST">
+
                 <div class="row gy-4">
 
                   <div class="col-md-6">
-                    <input type="text" name="name" class="form-control" placeholder="Votre nom" required="">
+                    <input type="text" name="name" class="form-control" placeholder="Votre nom" required>
                   </div>
 
-                  <div class="col-md-6 ">
-                    <input type="email" class="form-control" name="email" placeholder="Votre Email" required="">
-                  </div>
-
-                  <div class="col-12">
-                    <input type="text" class="form-control" name="subject" placeholder="Sujet" required="">
+                  <div class="col-md-6">
+                    <input type="email" name="email" class="form-control" placeholder="Votre Email" required>
                   </div>
 
                   <div class="col-12">
-                    <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+                    <input type="text" name="subject" class="form-control" placeholder="Sujet" required>
+                  </div>
+
+                  <div class="col-12">
+                    <textarea name="message" class="form-control" rows="6" placeholder="Message" required></textarea>
                   </div>
 
                   <div class="col-12 text-center">
+
                     <div class="loading">Chargement...</div>
                     <div class="error-message"></div>
                     <div class="sent-message">Votre message a bien été envoyé. Merci!</div>
 
                     <button type="submit" class="btn">Envoyer un message</button>
+
                   </div>
 
                 </div>
+
               </form>
 
             </div>
